@@ -1,0 +1,5 @@
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="100" height="100" rx="10" fill="#2380E3"/>
+<path d="M35.25 59L49.25 35C49.75 34.25 50.75 34.25 51.25 35L55 40C56 41.5 56.25 43.5 55.25 45L47 58.25C46.25 59.5 44.75 60.5 43.25 60.5H36C35.25 60.75 34.75 59.75 35.25 59ZM58 51L53.25 59C52.75 59.75 53.25 60.75 54.25 60.75H63.75C64.75 60.75 65.25 59.75 64.75 59L60 51C59.5 50.25 58.5 50.25 58 51Z" stroke="white" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M50 75C63.8075 75 75 63.8075 75 50C75 36.1925 63.8075 25 50 25C36.1925 25 25 36.1925 25 50C25 63.8075 36.1925 75 50 75Z" stroke="white" stroke-width="2" stroke-miterlimit="10"/>
+</svg>
