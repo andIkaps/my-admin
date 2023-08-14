@@ -52,7 +52,7 @@
             </q-list>
         </q-drawer>
 
-        <q-page-container class="tw-py-10 tw-px-5">
+        <q-page-container>
             <router-view />
         </q-page-container>
     </q-layout>
@@ -78,7 +78,7 @@ const linksList = reactive([
             {
                 title: "Employees Debt",
                 icon: "Moneys",
-                link: "/employees-debt",
+                link: "/employees/debt",
             },
             {
                 title: "Absence",

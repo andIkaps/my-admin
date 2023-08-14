@@ -10,15 +10,7 @@
 
             <q-tooltip>Toggle Sidebar</q-tooltip>
         </q-btn>
-        <q-btn
-            unelevated
-            dense
-            class="tw-bg-[#F8FAFB] tw-py-2 tw-px-3 tw-rounded-lg tw-hidden md:tw-inline-block"
-        >
-            <BaseIcon name="ColorSwatch" :size="20" color="#B3B3B5" />
 
-            <q-tooltip>Choose Theme</q-tooltip>
-        </q-btn>
         <q-btn
             unelevated
             dense
