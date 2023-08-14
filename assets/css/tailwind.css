@@ -58,6 +58,6 @@
     @apply tw-font-sen;
 }
 
-.q-table > tbody > tr > td {
+/* .q-table > tbody > tr > td {
     @apply tw-text-xs;
-}
+} */

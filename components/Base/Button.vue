@@ -2,10 +2,10 @@
     <q-btn
         unelevated
         :color="color"
-        text-color="black"
+        text-color="secondary"
         :size="size"
         :dense="dense"
-        class="tw-capitalize tw-flex tw-items-center tw-font-normal !tw-text-xs"
+        class="tw-capitalize tw-flex tw-items-center !tw-text-xs"
     >
         <template v-if="icon && iconPosition == 'left'">
             <BaseIcon :name="icon" :size="16" class="tw-mr-3" />

@@ -26,8 +26,10 @@ export default defineNuxtConfig({
         config: {
             brand: {
                 primary: "#5465ff",
+                secondary: "#7C7F85",
             },
         },
+        plugins: ["Notify"],
     },
 
     pinia: {

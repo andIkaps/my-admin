@@ -1,5 +1,5 @@
 <template>
-    <span class="tw-inline-block">
+    <span class="tw-inline-block tw-cursor-pointer">
         <vsx-icon :iconName="name" :size="size" type="linear" :color="color" />
         <slot></slot>
     </span>
