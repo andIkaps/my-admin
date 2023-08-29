@@ -1,4 +1,4 @@
-export const useDateTimeFormat = (dateTime) => {
+export const useDateTimeFormat = (dateTime: string) => {
     if (dateTime) {
         let date = new Date(dateTime);
         const months = [
@@ -22,9 +22,9 @@ export const useDateTimeFormat = (dateTime) => {
         const hours = date.getHours();
         const minutes = date.getMinutes();
 
-        const formattedDate = `${
-            months[monthIndex]
-        } ${day}, ${year} ${hours}:${minutes.toString().padStart(2, "0")}`;
+        const formattedDate = `${months[monthIndex]} ${day}, ${year} ${String(
+            hours
+        ).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
 
         return formattedDate;
     }

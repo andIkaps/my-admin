@@ -8,6 +8,7 @@
                 icon-position="left"
             />
         </BaseSectionTitle>
+
         <BaseCard>
             <q-input
                 v-model="keyword"
@@ -21,7 +22,7 @@
                 selection="multiple"
                 v-model:selected="selected"
                 :columns="tableColumns"
-                :rows="assignments?.data"
+                :rows="tableRows"
                 :loading="pending"
                 row-key="firstName"
             >
@@ -145,206 +146,46 @@
 </template>
 
 <script setup>
-// import { Notify } from "quasar";
-
 const menuStore = useMenuStore();
 
 const tableColumns = ref([
     {
-        name: "BranchID",
-        required: true,
-        label: "Branch",
+        name: "name",
+        label: "Name",
         align: "left",
-        field: "BranchID",
+        filter: true,
+        type: "text",
+        field: (row) => row.maidenName ?? "-",
     },
     {
-        name: "AreaID",
-        required: true,
-        label: "Area",
+        name: "email",
+        label: "Email",
         align: "left",
-        field: "AreaID",
+        filter: true,
+        type: "text",
+        field: (row) => row.email ?? "-",
     },
     {
-        name: "AgreementNo",
-        required: true,
-        label: "Agrement No",
+        name: "position",
+        label: "Position",
         align: "left",
-        field: "AgreementNo",
+        filter: true,
+        type: "select",
+        field: (row) => row.maidenName ?? "-",
     },
     {
-        name: "FullName",
-        required: true,
-        label: "Nama",
+        name: "join_date",
+        label: "Birth Date",
         align: "left",
-        field: "FullName",
+        filter: true,
+        type: "date",
+        field: (row) => useDateFormatter(row.birthDate) ?? "-",
     },
     {
-        name: "Model",
-        required: true,
-        label: "Model",
+        name: "action",
+        label: "",
         align: "left",
-        field: "Model",
-    },
-    {
-        name: "Tenor",
-        required: true,
-        label: "Tenor",
-        align: "left",
-        field: "Tenor",
-    },
-    {
-        name: "Angke",
-        required: true,
-        label: "Angsuran Ke",
-        align: "left",
-        field: "Angke",
-    },
-    {
-        name: "Ovd",
-        required: true,
-        label: "OVD",
-        align: "left",
-        field: "Ovd",
-    },
-    {
-        name: "InstallmentAmount",
-        required: true,
-        label: "Angsuran",
-        align: "left",
-        field: "InstallmentAmount",
-    },
-    {
-        name: "OutstandingPrincipal",
-        required: true,
-        label: "Saldo Pokok Today",
-        align: "left",
-        field: "OutstandingPrincipal",
-    },
-    {
-        name: "DisburseAmount",
-        required: true,
-        label: "Nominal Pencairan",
-        align: "left",
-        field: "DisburseAmount",
-    },
-    {
-        name: "DisburseDate",
-        required: true,
-        label: "Tanggal Cair",
-        align: "left",
-        field: (row) => (row.DisburseDate ? row.DisburseDate : "-"),
-    },
-    {
-        name: "DoDate",
-        required: true,
-        label: "Tanggal DO",
-        align: "left",
-        field: (row) => (row.DoDate ? row.DoDate : "-"),
-    },
-    {
-        name: "DueDate",
-        required: true,
-        label: "Tanggal JT",
-        align: "left",
-        field: "DueDate",
-    },
-    {
-        name: "ProductOfferingID",
-        required: true,
-        label: "Product Offering ID",
-        align: "left",
-        field: (row) => (row.ProductOfferingID ? row.ProductOfferingID : "-"),
-    },
-    {
-        name: "DebtorSubDistrict",
-        required: true,
-        label: "Kelurahan Residence",
-        align: "left",
-        field: "DebtorSubDistrict",
-    },
-    {
-        name: "DebtorDistrict",
-        required: true,
-        label: "Kecamatan Residence",
-        align: "left",
-        field: "DebtorDistrict",
-    },
-    {
-        name: "surveyor",
-        required: true,
-        label: "Surveyor",
-        align: "left",
-        field: (row) => row.Surveyor || "-",
-    },
-    {
-        name: "StatusAsset",
-        required: true,
-        label: "Status Asset",
-        align: "left",
-        field: "StatusAsset",
-    },
-    {
-        name: "ApplicationPriority",
-        required: true,
-        label: "Application Priority",
-        align: "left",
-        field: (row) =>
-            row.ApplicationPriority ? row.ApplicationPriority : "-",
-    },
-    {
-        name: "BusinessAgentName",
-        required: true,
-        label: "BA Name",
-        align: "left",
-        field: (row) => (row.BusinessAgentName ? row.BusinessAgentName : "-"),
-    },
-    {
-        name: "SourceApplication",
-        required: true,
-        label: "Source Application",
-        align: "left",
-        field: (row) => (row.SourceApplication ? row.SourceApplication : "-"),
-    },
-    {
-        name: "PullDate",
-        required: true,
-        label: "Tanggal Tarik",
-        align: "left",
-        field: (row) => (row.PullDate ? row.PullDate : "-"),
-    },
-    {
-        name: "PaymentDate",
-        required: true,
-        label: "Tanggal Pelunasan",
-        align: "left",
-        field: (row) => (row.PaymentDate ? row.PaymentDate : "-"),
-    },
-    {
-        name: "ReleaseDate",
-        required: true,
-        label: "Release Date",
-        align: "left",
-        field: (row) => (row.ReleaseDate ? row.ReleaseDate : "-"),
-    },
-    {
-        name: "SellingAmount",
-        required: true,
-        label: "Selling Amount",
-        align: "left",
-        field: (row) => (row.SellingAmount ? row.SellingAmount : "-"),
-    },
-    {
-        name: "LorPor",
-        required: true,
-        label: "Lor / Por",
-        align: "left",
-        field: (row) => (row.LorPor ? row.LorPor : "-"),
-    },
-    {
-        name: "Action",
-        required: true,
-        label: "Action",
-        align: "left",
+        filter: false,
     },
 ]);
 
@@ -353,37 +194,8 @@ const tableRows = ref([]);
 const keyword = ref("");
 const selected = ref([]);
 
-const params = new URLSearchParams();
-params.append("BranchID", 404);
-const { data: assignments, pending } = await useFetch(
-    "http://localhost:7102/api/v1/assignments?BranchID=460",
-    {
-        lazy: true,
-        server: false,
-        headers: {
-            Accept: "application/json",
-            Authorization:
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBdXRob3JpemVkIjp0cnVlLCJBdmF0YXIiOiJkZWZhdWx0LnBuZyIsIkVtYWlsIjoiYXpyaWVsLmZhdHVyMUBnbWFpbC5jb20iLCJFeHBpcmVkIjoxNjgwNzYzMzkyLCJJRCI6Ijk2YWM0YzUzLTYyZTItNDI1MC1iNjM2LWQ4YWM4Y2JhODZkZiIsIk5hbWUiOiJBenJpZWwgRmF0dXIiLCJSb2xlIjpbeyJJRCI6ImE4MzJiNGJkLWU1YzAtNDIwNS1iYjJkLTBmOTg4MjE4YTFmOCIsIk5hbWUiOiJTUFYiLCJEZXNjcmlwdGlvbiI6IkxvZ2luIHVudHVrIFN1cGVydmlzb3IgQXNzaWdubWVudCIsIkNyZWF0ZWRBdCI6IjIwMjMtMDQtMDRUMDk6Mzk6MTIrMDc6MDAiLCJDcmVhdGVkQnkiOiJTWVNURU0iLCJVcGRhdGVkQXQiOiIyMDIzLTA0LTA0VDA5OjM5OjEyKzA3OjAwIiwiVXBkYXRlZEJ5IjoiU1lTVEVNIiwiRGVsZXRlZEF0IjpudWxsfV0sIlVzZXJuYW1lIjoiYXpyaWVsZmF0dXIifQ.B1byKuhoaYt4dmVATC49bBV9mpwNLqvftw1EbFxKyQs",
-        },
-        async onResponseError({ request, response, options }) {
-            // Log error
-            Notify.create({
-                type: "negative",
-                message: "error while getting new Assignments",
-                timeout: 2000,
-            });
-            console.log(response.body, request);
-        },
-    }
-);
-
-if (assignments._value?.data) {
-    tableRows.value = await assignments._value?.data;
-}
-
 onMounted(() => {
     menuStore.title = "Create Assignments";
-    console.log("mounted");
 });
 </script>
 

@@ -27,20 +27,10 @@
                 :readonly="readonly"
                 :model-value="modelValue"
                 input-class="!tw-border-4"
-                :class="!required ?? 'tw-mb-6'"
+                :class="!required ?? 'tw-mb-3'"
                 :autogrow="autogrow"
                 :autofocus="autofocus"
-                :rules="[
-                    required
-                        ? (val) =>
-                              (val !== null && val !== '') ||
-                              `${label} is required`
-                        : null,
-                    max
-                        ? (val) =>
-                              (val > 0 && val <= max) || 'Max value of ' + max
-                        : null,
-                ]"
+                :rules="rules"
                 :placeholder="placeholder"
                 @update:model-value="
                     (value) => $emit('update:modelValue', value)
@@ -55,40 +45,73 @@
     </div>
 </template>
 
-<script setup>
-defineProps({
-    // Design Input
-    isFilled: Boolean,
-    isOutlined: Boolean,
-    isBorderedless: Boolean,
-    isSquare: Boolean,
-    dense: Boolean,
+<script setup lang="ts">
+interface IProps {
+    // design input
+    isFilled?: boolean;
+    isOutlined?: boolean;
+    isBorderedless?: boolean;
+    isSquare?: boolean;
 
-    // Must Have Attribute
-    label: String,
-    type: String,
-    modelValue: String,
-    textarea: Boolean,
+    // required attribute
+    label: string;
+    type: string;
+    modelValue: string;
 
-    // Optional Attribute
-    autofocus: Boolean,
-    prefix: String,
-    suffix: String,
-    hint: String,
-    max: Number,
-    placeholder: String,
-    align: String,
-    mark: Boolean,
-    mask: String,
-    autogrow: Boolean,
+    // optional attribute
+    dense?: boolean;
+    textarea?: boolean;
+    autofocus?: boolean;
+    prefix?: string;
+    suffix?: string;
+    hint?: string;
+    max?: number;
+    placeholder?: string;
+    align?: string;
+    mark?: boolean;
+    mask?: string;
+    autogrow?: boolean;
 
-    // Validation Attirbute
-    required: Boolean,
-    disabled: Boolean,
-    readonly: Boolean,
-    icon: String,
+    // Validation Attirbut
+    required?: boolean;
+    disabled?: boolean;
+    readonly?: boolean;
+    icon?: string;
+}
+
+const props = defineProps<IProps>();
+defineEmits<{
+    (e: "update:modelValue", value: string): void;
+}>();
+
+const rules: Ref<any[]> = ref([]);
+
+const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    return emailRegex.test(email);
+};
+
+onMounted(() => {
+    if (props.required) {
+        rules.value.push((val: string) =>
+            val ? true : `${props.label} is required`
+        );
+    }
+
+    if (props.max) {
+        const max = props.max;
+        rules.value.push((val: number) =>
+            val > 0 && val <= max ? true : `${props.label} is required`
+        );
+    }
+
+    if (props.type == "email") {
+        rules.value.push((val: string) =>
+            validateEmail(val) ? true : `${props.label} is not a valid email!`
+        );
+    }
 });
-defineEmits(["update:modelValue"]);
 </script>
 
 <style>

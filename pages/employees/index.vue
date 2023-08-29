@@ -131,7 +131,7 @@
                 v-model:selected="selected"
                 :columns="tableColumns"
                 :rows="data?.users"
-                :loading="pending"
+                :loading="loading"
                 row-key="firstName"
             >
                 <template v-slot:header="props">
@@ -510,18 +510,16 @@ const drawerRight = ref(false);
 const keyword = ref("");
 const selected = ref([]);
 
-const params = new URLSearchParams();
-params.append("Page", 1);
-
-console.log(params.toString());
-
-const { data, pending } = useFetch(
-    `https://dummyjson.com/users?${params.toString()}`,
-    {
-        lazy: true,
-        server: false,
-    }
-);
+const {
+    data,
+    pending: loading,
+    error,
+} = await useApi("/users", {
+    method: "GET",
+    onResponse(context) {
+        return context.response._data;
+    },
+});
 
 onMounted(() => {
     menuStore.title = "Employees";

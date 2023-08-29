@@ -5,7 +5,7 @@
         text-color="secondary"
         :size="size"
         :dense="dense"
-        class="tw-capitalize tw-flex tw-items-center !tw-text-xs"
+        class="tw-capitalize tw-flex tw-items-center"
     >
         <template v-if="icon && iconPosition == 'left'">
             <BaseIcon :name="icon" :size="16" class="tw-mr-3" />
@@ -19,21 +19,17 @@
     </q-btn>
 </template>
 
-<script setup>
-defineProps({
-    label: String,
-    icon: String,
-    iconPosition: String,
-    size: Number,
-    dense: Boolean,
-    color: String,
-});
-</script>
+<script setup lang="ts">
+interface IButton {
+    label?: string;
+    icon?: string;
+    iconPosition?: string;
+    size?: string;
+    dense?: boolean;
+    color?: string;
+}
 
-<script>
-export default {
-    name: "base-button",
-};
+defineProps<IButton>();
 </script>
 
 <style></style>

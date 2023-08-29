@@ -5,18 +5,14 @@
     </span>
 </template>
 
-<script setup>
-defineProps({
-    name: String,
-    size: Number,
-    color: String,
-});
-</script>
+<script setup lang="ts">
+interface Icon {
+    name: string;
+    size: string | number;
+    color?: string;
+}
 
-<script>
-export default {
-    name: "base-icon",
-};
+defineProps<Icon>();
 </script>
 
 <style></style>
