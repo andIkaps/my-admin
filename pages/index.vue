@@ -305,7 +305,7 @@
     </q-page>
 </template>
 
-<script setup>
+<script setup lang="ts">
 useHead({
     title: "Dashboard",
 });
@@ -506,31 +506,31 @@ const attendenceColumns = ref([
         name: "name",
         label: "Employee Name",
         align: "left",
-        field: (row) => row.User?.Name ?? "-",
+        field: (row: any) => row.User?.Name ?? "-",
     },
     {
         name: "date",
         label: "Date",
         align: "left",
-        field: (row) => useDateFormatter(row.Date) ?? "-",
+        field: (row: any) => useDateFormatter(row.Date) ?? "-",
     },
     {
         name: "time_in",
         label: "Time in",
         align: "left",
-        field: (row) => useDateTimeFormat(row.TimeIn) ?? "-",
+        field: (row: any) => useDateTimeFormat(row.TimeIn) ?? "-",
     },
     {
         name: "time_out",
         label: "Time Out",
         align: "left",
-        field: (row) => (row.TimeOut != "" ? row.TimeOut : "-"),
+        field: (row: any) => (row.TimeOut != "" ? row.TimeOut : "-"),
     },
     {
         name: "status",
         label: "Status",
         align: "left",
-        field: (row) => row.Status?.Name ?? "-",
+        field: (row: any) => row.Status?.Name ?? "-",
     },
 ]);
 const attendenceRows = ref([
@@ -577,25 +577,25 @@ const loanColumns = ref([
         name: "name",
         label: "Employee Name",
         align: "left",
-        field: (row) => row.User?.Name ?? "-",
+        field: (row: any) => row.User?.Name ?? "-",
     },
     {
         name: "total_debt",
         label: "Total Debt",
         align: "left",
-        field: (row) => useRupiahFormat(row.Debt?.Amount) ?? "-",
+        field: (row: any) => useRupiahFormat(row.Debt?.Amount) ?? "-",
     },
     {
         name: "reason",
         label: "Reason",
         align: "left",
-        field: (row) => row.Reason ?? "-",
+        field: (row: any) => row.Reason ?? "-",
     },
     {
         name: "amount",
         label: "Amount",
         align: "left",
-        field: (row) => useRupiahFormat(row.Amount) ?? "-",
+        field: (row: any) => useRupiahFormat(row.Amount) ?? "-",
     },
     {
         name: "action",

@@ -69,7 +69,10 @@
 
                     <q-item clickable v-close-popup>
                         <q-item-section class="tw-px-2 tw-py-1">
-                            <section class="tw-flex tw-items-center tw-gap-3">
+                            <NuxtLink
+                                to="/auth/login"
+                                class="tw-flex tw-items-center tw-gap-3"
+                            >
                                 <BaseIcon
                                     name="Logout"
                                     :size="18"
@@ -78,7 +81,7 @@
                                 <span class="tw-text-red tw-text-sm"
                                     >Logout</span
                                 >
-                            </section>
+                            </NuxtLink>
                         </q-item-section>
                     </q-item>
                 </q-list>
